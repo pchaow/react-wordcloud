@@ -94,19 +94,20 @@ var WordCloud = function (_React$Component) {
 
       return colorScale ? colorScale(d, i) : _chooseRandom(colors || DEFAULT_COLORS);
     }, _this._onMouseOver = function (d) {
+      console.log(d);
       var _this$props2 = _this.props,
           tooltipEnabled = _this$props2.tooltipEnabled,
           wordKey = _this$props2.wordKey,
           wordCountKey = _this$props2.wordCountKey,
           onSetTooltip = _this$props2.onSetTooltip;
 
-      var tooltipContent = onSetTooltip ? onSetTooltip(d) : d[wordKey] + ' (' + d[wordCountKey] + ')';
+      var tooltipContent = onSetTooltip ? onSetTooltip(d) : _lodash2.default.get(d, wordKey, '') + (' (' + d[wordCountKey] + ')');
       if (tooltipEnabled) {
         _this.setState({
           tooltipContent: tooltipContent,
           tooltipEnabled: true,
-          tooltipX: _d3Selection.event.pageX,
-          tooltipY: _d3Selection.event.pageY - 28
+          tooltipX: _d3Selection.event.clientX,
+          tooltipY: _d3Selection.event.clientY - 28
         });
       }
     }, _this._onMouseOut = function () {
@@ -212,7 +213,9 @@ var WordCloud = function (_React$Component) {
           spiral = props.spiral,
           width = props.width,
           wordCountKey = props.wordCountKey,
-          words = props.words;
+          words = props.words,
+          minFontSize = props.minFontSize,
+          maxFontSize = props.maxFontSize;
       // update svg/vis nodes dimensions
 
       this._setDimensions(height, width);
@@ -224,9 +227,10 @@ var WordCloud = function (_React$Component) {
 
       // update fontScale by rescaling to min/max values of data
       // if min === max, we prefer the upper bound range value
+      console.log('wordcloud props', props);
       var d3Scale = _getScale(scale);
       var filteredWords = words.slice(0, maxWords);
-      this._fontScale = _lodash2.default.uniqBy(filteredWords, wordCountKey).length > 1 ? d3Scale().range([10, 100]) : d3Scale().range([100, 100]);
+      this._fontScale = _lodash2.default.uniqBy(filteredWords, wordCountKey).length > 1 ? d3Scale().range([minFontSize, maxFontSize]) : d3Scale().range([maxFontSize, maxFontSize]);
       if (filteredWords.length) {
         this._fontScale.domain([d3.min(filteredWords, function (d) {
           return d[wordCountKey];
@@ -339,7 +343,9 @@ WordCloud.defaultProps = {
   spiral: 'rectangular',
   tooltipEnabled: true,
   transitionDuration: 1000,
-  width: null
+  width: null,
+  minFontSize: 10,
+  maxFontSize: 100
 };
 
 
