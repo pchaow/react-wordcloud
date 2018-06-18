@@ -349,7 +349,7 @@ class WordCloud extends React.Component<TProps, TState> {
   }
 
   _setText = (d: Object): string => {
-    return d[this.props.wordKey];
+    return _.get(d, this.props.wordKey, '');
   };
 
   _colorScale = (d: Object, i: number): string => {
@@ -374,7 +374,7 @@ class WordCloud extends React.Component<TProps, TState> {
     }
   };
 
-  _onMouseOut = (d: Object): void => {
+  _onMouseOut = (): void => {
     if (this.props.tooltipEnabled) {
       this.setState({
         tooltipEnabled: false,
