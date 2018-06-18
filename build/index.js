@@ -86,7 +86,7 @@ var WordCloud = function (_React$Component) {
       tooltipX: 0,
       tooltipY: 0
     }, _this._setText = function (d) {
-      return d[_this.props.wordKey];
+      return _lodash2.default.get(d, _this.props.wordKey, '');
     }, _this._colorScale = function (d, i) {
       var _this$props = _this.props,
           colorScale = _this$props.colorScale,
@@ -109,7 +109,7 @@ var WordCloud = function (_React$Component) {
           tooltipY: _d3Selection.event.pageY - 28
         });
       }
-    }, _this._onMouseOut = function (d) {
+    }, _this._onMouseOut = function () {
       if (_this.props.tooltipEnabled) {
         _this.setState({
           tooltipEnabled: false
@@ -318,7 +318,7 @@ var WordCloud = function (_React$Component) {
       (0, _invariant2.default)(minAngle <= maxAngle, 'minAngle must be <= maxAngle');
       if (words.length > 0) {
         var firstRow = words[0];
-        (0, _invariant2.default)(wordKey in firstRow, 'Word key must be a valid key in the data');
+        (0, _invariant2.default)(_lodash2.default.get(firstRow, wordKey, false), 'Word key must be a valid key in the data');
         (0, _invariant2.default)(wordCountKey in firstRow, 'Word count key must be a valid key in the data');
       }
     }
