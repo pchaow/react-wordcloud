@@ -392,7 +392,7 @@ class WordCloud extends React.Component<TProps, TState> {
     if (words.length > 0) {
       const firstRow = words[0];
       invariant(
-        wordKey in firstRow,
+        _.get(firstRow, wordKey, false),
         'Word key must be a valid key in the data',
       );
       invariant(
