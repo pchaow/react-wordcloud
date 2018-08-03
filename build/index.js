@@ -94,7 +94,6 @@ var WordCloud = function (_React$Component) {
 
       return colorScale ? colorScale(d, i) : _chooseRandom(colors || DEFAULT_COLORS);
     }, _this._onMouseOver = function (d) {
-      console.log(d);
       var _this$props2 = _this.props,
           tooltipEnabled = _this$props2.tooltipEnabled,
           wordKey = _this$props2.wordKey,
@@ -227,7 +226,6 @@ var WordCloud = function (_React$Component) {
 
       // update fontScale by rescaling to min/max values of data
       // if min === max, we prefer the upper bound range value
-      console.log('wordcloud props', props);
       var d3Scale = _getScale(scale);
       var filteredWords = words.slice(0, maxWords);
       this._fontScale = _lodash2.default.uniqBy(filteredWords, wordCountKey).length > 1 ? d3Scale().range([minFontSize, maxFontSize]) : d3Scale().range([maxFontSize, maxFontSize]);
