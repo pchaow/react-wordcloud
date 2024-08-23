@@ -7,21 +7,21 @@
   "author": "Chris Zhou <christoper.r.zhou@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf build/*",
+    "clean": "rimraf build/* --glob",
     "build": "yarn clean && npx babel src --out-dir build",
     "lint": "flow && eslint --fix src",
     "prepare": "npm run build"
   },
   "dependencies": {
-    "d3-array": "^1.2.1",
+    "d3-array": "^3.2.4",
     "d3-cloud": "^1.2.4",
     "d3-scale": "^4.0.2",
-    "d3-selection": "^1.1.0",
-    "d3-selection-multi": "^0.3.0",
+    "d3-selection": "^3.0.0",
+    "d3-selection-multi": "^1.0.1",
     "invariant": "^2.2.2",
     "lodash": "^4.17.4",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.8",
@@ -32,8 +32,8 @@
     "@babel/preset-flow": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-stage-0": "^7.8.3",
-    "flow-bin": "^0.61.0",
-    "prettier": "1.9.2",
-    "rimraf": "^2.6.2"
+    "flow-bin": "^0.244.0",
+    "prettier": "3.3.3",
+    "rimraf": "^6.0.1"
   }
 }
